@@ -3,9 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <title>Psychic Game</title>
+  </head>
+  <body>
+    <body>
+      <div id="game">
+        <h1>The Psychic Game</h1>
+        <p>What letter am I thinking of?</p>
+        <p>Wins: 0</p>
+        <p>Losses: 0</p>
+        <p>Guesses Left: 9</p>
+        <p>Your Guesses:</p>
+      </div>
+    </body>
     <script type="text/javascript">
-      // <!--Letter Choices-->
-      var computerChoices = [
+      // Letter Choices
+      var letters = [
         'a',
         'b',
         'c',
@@ -33,75 +45,55 @@
         'y',
         'z'
       ];
-      // <!--Game Stats-->
+      // Game Stats
       var wins = 0;
       var losses = 0;
-      var chances = 9;
-      var guessArray = [];
+      var guessesLeft = 9;
+      var guessesMade = [];
+      var userGuess = document.onkeyup;
+      var compGuess = letters[Math.floor(Math.random() * letters.length)];
 
-      //  <!--Game Controls-->
+      // Game Controls
 
       document.onkeyup = function(event) {
-        var userGuess = event.key;
+        userGuess = event.key;
+        guessesMade.push(userGuess);
 
-        var computerGuess =
-          computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-        if (computerChoices.includes(userGuess)) {
-          if (userGuess === computerGuess) {
-            wins++;
-            guessArray.push(userGuess);
-            chances--;
-          } else if (userGuess !== computerGuess) {
-            losses++;
-            guessArray.push(userGuess);
-            chances--;
-          }
-
-          if (chances === 0) {
-            location.reload();
-          } else if (losses === 10) {
-            location.reload();
-          } else if (wins === 10) {
-            location.reload();
-          }
-        } else {
+        if (compGuess == userGuess) {
+          wins++;
+          guessesLeft = 9;
+          guessesMade = [];
         }
 
+        if (compGuess != userGuess) {
+          guessesLeft--;
+        }
+
+        if (guessesLeft == 0) {
+          losses++;
+          guessesLeft = 9;
+          guessesMade = [];
+        }
+
+        // Game Information
+
         var html =
-          '<p>Guess what letter Im thinking of????</p>' +
+          '<p><h1>The Psychic Game</h1></p>' +
+          '<p>What letter am I thinking of?</p>' +
           '<p>Wins: ' +
           wins +
           '</p>' +
           '<p>Losses: ' +
           losses +
           '</p>' +
-          '<p>Guesses left: ' +
-          chances +
+          '<p>Guesses Left: ' +
+          guessesLeft +
           '</p>' +
-          '<p>Your guesses so far: ' +
-          guessArray +
+          '<p>Your Guesses: ' +
+          guessesMade +
           '</p>';
-
-        document.querySelector('#game').innerHTML = html;
+        document.getElementById('game').innerHTML = html;
       };
     </script>
-  </head>
-  <body>
-    <h1>The Psychic Game</h1>
-
-    <div id="game" class="main-container">
-      <p>Guess what letter Im thinking of????</p>
-      <p>Wins: 0</p>
-      <p>Losses: 0</p>
-      <p>Guesses left: 9</p>
-      <p>Your guesses so far:</p>
-    </div>
-
-    <div class="main-container"></div>
-
-    <footer>
-      <div class="container"></div>
-    </footer>
   </body>
 </html>
