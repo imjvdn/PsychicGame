@@ -3,7 +3,91 @@
   <head>
     <meta charset="UTF-8" />
     <title>Psychic Game</title>
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+      // <!--Letter Choices-->
+      var computerChoices = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+      ];
+      // <!--Game Stats-->
+      var wins = 0;
+      var losses = 0;
+      var chances = 9;
+      var guessArray = [];
+
+      //  <!--Game Controls-->
+
+      document.onkeyup = function(event) {
+        var userGuess = event.key;
+
+        var computerGuess =
+          computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+        if (computerChoices.includes(userGuess)) {
+          if (userGuess === computerGuess) {
+            wins++;
+            guessArray.push(userGuess);
+            chances--;
+          } else if (userGuess !== computerGuess) {
+            losses++;
+            guessArray.push(userGuess);
+            chances--;
+          }
+          // Chances = 0
+          if (chances === 0) {
+            location.reload();
+          }
+          // Losses Reaches 10
+          else if (losses === 10) {
+            location.reload();
+          } else if (wins === 10) {
+            location.reload();
+          }
+        } else {
+        }
+
+        var html =
+          '<p>Guess what letter Im thinking of????</p>' +
+          '<p>Wins: ' +
+          wins +
+          '</p>' +
+          '<p>Losses: ' +
+          losses +
+          '</p>' +
+          '<p>Guesses left: ' +
+          chances +
+          '</p>' +
+          '<p>Your guesses so far: ' +
+          guessArray +
+          '</p>';
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector('#game').innerHTML = html;
+      };
+    </script>
   </head>
   <body>
     <header id="header">
@@ -13,7 +97,7 @@
     </header>
 
     <div id="game" class="main-container">
-      <p>Guess what letter I'm thinking of????</p>
+      <p>Guess what letter Im thinking of????</p>
       <p>Wins: 0</p>
       <p>Losses: 0</p>
       <p>Guesses left: 9</p>
