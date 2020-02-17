@@ -10,7 +10,7 @@
       <p>What letter am I thinking of?</p>
       <p>Wins: 0</p>
       <p>Losses: 0</p>
-      <p>Guesses Left: 9</p>
+      <p>Guesses Left: 10</p>
       <p>Your Guesses:</p>
     </div>
 
@@ -51,7 +51,7 @@
 
       var wins = 0;
       var losses = 0;
-      var guessesLeft = 9;
+      var guessesLeft = 10;
       var guessesMade = [];
       var userGuess = document.onkeyup;
       var compGuess = letters[Math.floor(Math.random() * letters.length)];
@@ -64,7 +64,7 @@
 
         if (compGuess == userGuess) {
           wins++;
-          guessesLeft = 9;
+          guessesLeft = 10;
           guessesMade = [];
         }
 
@@ -74,7 +74,7 @@
 
         if (guessesLeft == 0) {
           losses++;
-          guessesLeft = 9;
+          guessesLeft = 10;
           guessesMade = [];
         }
 
