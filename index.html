@@ -57,12 +57,10 @@
             guessArray.push(userGuess);
             chances--;
           }
-          // Chances = 0
+
           if (chances === 0) {
             location.reload();
-          }
-          // Losses Reaches 10
-          else if (losses === 10) {
+          } else if (losses === 10) {
             location.reload();
           } else if (wins === 10) {
             location.reload();
@@ -90,11 +88,7 @@
     </script>
   </head>
   <body>
-    <header id="header">
-      <div class="container">
-        <h1>The Psychic Game</h1>
-      </div>
-    </header>
+    <h1>The Psychic Game</h1>
 
     <div id="game" class="main-container">
       <p>Guess what letter Im thinking of????</p>
